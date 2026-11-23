@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#183c2c">
-  <title>2026 함께 걷는 날 | 화목선</title>
+  <title>2027 함께 걷는 날 | 동탄즐거운교회</title>
   <style>
     :root {
       font-family: "Malgun Gothic", system-ui, sans-serif;
       color: #19352a;
-      background: #f7eddf;
+      background: #f1f3ea;
       line-height: 1.6;
     }
     * { box-sizing: border-box; }
@@ -20,7 +20,7 @@
       padding: clamp(1.4rem, 6vw, 3rem);
       border-radius: 1.5rem;
       color: #fffdf4;
-     background: radial-gradient(ellipse at top right, #a6532b, #563222 68%);
+      background: radial-gradient(ellipse at top right, #406849, #183c2c 68%);
     }
     header p { margin: 0; }
     .church { color: #d9e8cc; font-weight: 700; }
@@ -90,14 +90,15 @@
 <body>
   <main class="app">
     <header>
-      <p class="church">화목선</p>
-      <h1>2026 함께 걷는 날</h1>
-      <p>하나님 나라의 은혜와 사랑이 그대 품안에</p>
+      <p class="church">동탄즐거운교회</p>
+      <h1>2027 함께 걷는 날</h1>
+      <p>하나님 나라의 속도로 걷습니다</p>
     </header>
 
     <div id="event-tabs" class="tabs" role="tablist" aria-label="행사 메뉴" hidden>
       <button type="button" id="tab-schedule" role="tab" aria-selected="true" aria-controls="schedule">일정</button>
       <button type="button" id="tab-seats" role="tab" aria-selected="false" aria-controls="seats" tabindex="-1">좌석</button>
+      <button type="button" id="tab-service" role="tab" aria-selected="false" aria-controls="service" tabindex="-1">예배</button>
       <button type="button" id="tab-photos" role="tab" aria-selected="false" aria-controls="photos" tabindex="-1">사진</button>
     </div>
 
@@ -107,9 +108,10 @@
       <p>날짜 · 추후 안내<br>장소 · 추후 안내</p>
       <p class="note">아래는 예시 일정입니다.</p>
       <ul class="schedule">
-        <li><time datetime="08:30">08:30</time>중리IC 무료공영주차장 출발</li>
-        <li><time datetime="12:00">12:00</time>주문진 도착 및 점심 식사</li>
-        <li><time datetime="14:00">14:00</time>주문진 족구장 이동후 운동</li>
+        <li><time datetime="09:00">09:00</time>교회 출발</li>
+        <li><time datetime="10:30">10:30</time>함께 걷기</li>
+        <li><time datetime="12:00">12:00</time>점심 식사</li>
+        <li><time datetime="14:00">14:00</time>말씀 나눔</li>
       </ul>
     </section>
 
@@ -131,7 +133,17 @@
     </section>
 
     <!-- 예배 변경: 이 구역에서 예배 순서를 수정하세요. -->
-  
+    <section id="service" aria-labelledby="heading-service">
+      <h2 id="heading-service">예배 순서</h2>
+      <p class="note">아래는 예시 순서입니다.</p>
+      <ol class="service">
+        <li>함께 찬양</li>
+        <li>대표 기도</li>
+        <li>성경 봉독</li>
+        <li>말씀 나눔</li>
+        <li>마침 기도</li>
+      </ol>
+    </section>
 
     <!-- 사진 변경: 이미지 주소(src), 설명(alt), 제목을 함께 수정하세요. -->
     <section id="photos" aria-labelledby="heading-photos">
