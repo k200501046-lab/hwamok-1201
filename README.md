@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183c2c">
+  <title>2026 함께 걷는 날 | 화목성</title>
+  <style>
+    :root {
+      font-family: "Malgun Gothic", system-ui, sans-serif;
+      color: #19352a;
+      background: #f1f3ea;
+      line-height: 1.6;
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; }
+    .app { max-width: 48rem; margin: auto; padding: clamp(.75rem, 4vw, 2rem); }
+    header {
+      padding: clamp(1.4rem, 6vw, 3rem);
+      border-radius: 1.5rem;
+      color: #fffdf4;
+      background: radial-gradient(ellipse at top right, #406849, #183c2c 68%);
+    }
+    header p { margin: 0; }
+    .church { color: #d9e8cc; font-weight: 700; }
+    h1 { margin: .5rem 0; font-size: clamp(1.9rem, 7vw, 3.4rem); line-height: 1.16; letter-spacing: -.055em; }
+    h2 { margin: 0 0 .5rem; font-size: 1.5rem; }
+    p { margin: .5rem 0; }
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: .25rem;
+      margin: 1rem 0 .75rem;
+      padding: .3rem;
+      background: #e2e9da;
+      border-radius: 1rem;
+    }
+    button { font: inherit; cursor: pointer; }
+    .tabs button {
+      min-height: 48px;
+      padding: .35rem .1rem;
+      background: transparent;
+      color: inherit;
+      font-weight: 700;
+      border: 0;
+      border-radius: .75rem;
+    }
+    .tabs button[aria-selected="true"], .close { background: #244d38; color: white; }
+    :focus-visible { outline: 3px solid #945200; outline-offset: 3px; }
+    section {
+      background: #fffdf8;
+      border: 1px solid #d9e2d3;
+      border-radius: 1.25rem;
+      padding: clamp(1rem, 4vw, 2rem);
+      margin-bottom: .75rem;
+    }
+    .note { color: #465c50; }
+    .schedule, .service { margin: 1rem 0 0; }
+    .schedule { padding: 0; list-style: none; }
+    .schedule li { display: grid; grid-template-columns: 4.25rem 1fr; gap: .3rem; }
+    .schedule li, .service li { padding: .7rem 0; border-top: 1px solid #e1e8df; }
+    time { color: #386049; font-weight: 700; font-variant-numeric: tabular-nums; }
+    caption { padding: .6rem .25rem; background: #dfe9d9; font-weight: 700; }
+    table { width: 100%; max-width: 28rem; margin: 1rem auto; table-layout: fixed; border-spacing: .25rem; }
+    th, td { padding: .5rem .1rem; text-align: center; }
+    td { background: #eef3e9; border-radius: .4rem; }
+    .aisle { background: transparent; color: #465c50; font-size: .85rem; }
+    .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin-top: 1rem; }
+    .photo {
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid #d9e2d3;
+      border-radius: .85rem;
+      background: #edf2e8;
+      color: inherit;
+      text-align: left;
+    }
+    .photo span { display: block; padding: .65rem; font-weight: 700; }
+    img { display: block; width: 100%; color: #19352a; background: #dfe9d9; }
+    .photo img { aspect-ratio: 4 / 3; object-fit: cover; }
+    a { color: #244d38; text-underline-offset: .15em; }
+    dialog { width: min(42rem, calc(100% - 1.5rem)); max-height: 90vh; border: 0; border-radius: 1rem; padding: 1rem; color: inherit; background: #fffdf8; }
+    dialog::backdrop { background: rgb(13 31 22 / 78%); }
+    dialog img { max-height: 65vh; object-fit: contain; border-radius: .5rem; }
+    .close { min-height: 44px; border: 0; border-radius: .5rem; padding: .4rem 1rem; margin-top: .75rem; }
+    @media (max-width: 350px) { .gallery { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <p class="church">화목선</p>
+      <h1>2027 함께 걷는 날</h1>
+      <p>하나님 나라의 은혜와 사랑이 그대 품안에</p>
+    </header>
+
+    <div id="event-tabs" class="tabs" role="tablist" aria-label="행사 메뉴" hidden>
+      <button type="button" id="tab-schedule" role="tab" aria-selected="true" aria-controls="schedule">일정</button>
+      <button type="button" id="tab-seats" role="tab" aria-selected="false" aria-controls="seats" tabindex="-1">좌석</button>
+      <button type="button" id="tab-service" role="tab" aria-selected="false" aria-controls="service" tabindex="-1">예배</button>
+      <button type="button" id="tab-photos" role="tab" aria-selected="false" aria-controls="photos" tabindex="-1">사진</button>
+    </div>
+
+    <!-- 일정 변경: 이 구역에서 날짜, 장소, 시간을 수정하세요. -->
+    <section id="schedule" aria-labelledby="heading-schedule">
+      <h2 id="heading-schedule">행사 일정</h2>
+      <p>날짜 · 추후 안내<br>장소 · 추후 안내</p>
+      <p class="note">아래는 예시 일정입니다.</p>
+      <ul class="schedule">
+        <li><time datetime="08:30">08:30</time>중리IC 무료공영주차장 출발</li>
+        <li><time datetime="12:00">12:00</time>주문진 도착 및 점심 식사</li>
+        <li><time datetime="14:00">14:00</time>주문진 족구장 이동후 운동</li>
+      </ul>
+    </section>
+
+    <!-- 좌석 변경: 좌석 번호와 탑승 안내를 수정하세요. -->
+    <section id="seats" aria-labelledby="heading-seats">
+      <h2 id="heading-seats">차량 좌석</h2>
+      <p class="note">예시 좌석표입니다. 실제 탑승 차량과 좌석은 출발 전 안내합니다.</p>
+      <table>
+        <caption>1호차 · 차량 앞쪽</caption>
+        <thead>
+          <tr><th scope="col">왼쪽</th><th scope="col">통로</th><th scope="col">오른쪽</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A1</td><td class="aisle"></td><td>A2</td></tr>
+          <tr><td>B1</td><td class="aisle"></td><td>B2</td></tr>
+          <tr><td>C1</td><td class="aisle"></td><td>C2</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 예배 변경: 이 구역에서 예배 순서를 수정하세요. -->
+    <section id="service" aria-labelledby="heading-service">
+      <h2 id="heading-service">예배 순서</h2>
+      <p class="note">아래는 예시 순서입니다.</p>
+      <ol class="service">
+        <li>함께 찬양</li>
+        <li>대표 기도</li>
+        <li>성경 봉독</li>
+        <li>말씀 나눔</li>
+        <li>마침 기도</li>
+      </ol>
+    </section>
+
+    <!-- 사진 변경: 이미지 주소(src), 설명(alt), 제목을 함께 수정하세요. -->
+    <section id="photos" aria-labelledby="heading-photos">
+      <h2 id="heading-photos">행사 사진첩</h2>
+      <p class="note">풍경 예시입니다. 사진을 누르면 크게 볼 수 있습니다.</p>
+      <div class="gallery">
+        <button type="button" class="photo" aria-haspopup="dialog" aria-label="숲길 사진 크게 보기">
+          <img src="https://images.unsplash.com/photo-1700745286959-8658de43a15c?auto=format&amp;w=1200&amp;q=80" alt="키 큰 나무 사이로 이어지는 흙길" loading="lazy">
+          <span>숲길</span>
+        </button>
+        <button type="button" class="photo" aria-haspopup="dialog" aria-label="햇살 드는 산책로 사진 크게 보기">
+          <img src="https://images.unsplash.com/photo-1661457707951-bfff6ef79330?auto=format&amp;w=1200&amp;q=80" alt="햇살이 잎 사이로 비치는 녹색 산책로" loading="lazy">
+          <span>햇살 드는 산책로</span>
+        </button>
+      </div>
+      <p class="note">사진 출처 · <a href="https://unsplash.com/photos/GJJdGDsoomU">Anton Sobotyak</a>, <a href="https://unsplash.com/photos/VbDclfCZy4I">Unsplash 사진 원본</a></p>
+    </section>
+  </main>
+
+  <dialog id="photo-viewer" aria-labelledby="photo-title">
+    <h2 id="photo-title"></h2>
+    <img id="large-photo" alt="">
+    <form method="dialog"><button type="submit" class="close" autofocus>닫기</button></form>
+  </dialog>
+
+  <script>
+    const tabList = document.getElementById('event-tabs');
+    const tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
+    const panels = tabs.map(tab => document.getElementById(tab.getAttribute('aria-controls')));
+
+    function showTab(index) {
+      tabs.forEach((tab, position) => {
+        const selected = position === index;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        panels[position].hidden = !selected;
+      });
+    }
+
+    tabs.forEach((tab, index) => {
+      const panel = panels[index];
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', tab.id);
+      panel.tabIndex = 0;
+      tab.addEventListener('click', () => showTab(index));
+      tab.addEventListener('keydown', event => {
+        let next;
+        switch (event.key) {
+          case 'ArrowRight': next = (index + 1) % tabs.length; break;
+          case 'ArrowLeft': next = (index - 1 + tabs.length) % tabs.length; break;
+          case 'Home': next = 0; break;
+          case 'End': next = tabs.length - 1; break;
+          default: return;
+        }
+        event.preventDefault();
+        showTab(next);
+        tabs[next].focus();
+      });
+    });
+    showTab(0);
+    tabList.hidden = false;
+
+    const viewer = document.getElementById('photo-viewer');
+    const largePhoto = document.getElementById('large-photo');
+    const photoTitle = document.getElementById('photo-title');
+
+    document.querySelectorAll('.photo').forEach(button => {
+      button.addEventListener('click', () => {
+        const thumbnail = button.querySelector('img');
+        largePhoto.src = thumbnail.src;
+        largePhoto.alt = thumbnail.alt;
+        photoTitle.textContent = button.querySelector('span').textContent;
+        viewer.showModal();
+      });
+    });
+  </script>
+</body>
+</html>
